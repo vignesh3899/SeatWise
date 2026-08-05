@@ -1,0 +1,32 @@
+# Environment / secrets
+.env
+functions/.env
+**/google-services.json
+**/GoogleService-Info.plist
+# NOTE: lib/firebase_options.dart is intentionally committed as a placeholder so
+# the project compiles out of the box. Running `flutterfire configure` will
+# overwrite it with your real (non-secret) Firebase client configuration.
+
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+coverage/
+*.iml
+
+# Node (Cloud Functions)
+functions/node_modules/
+functions/lib/
+node_modules/
+npm-debug.log
+
+# IDE / OS
+.idea/
+.vscode/*
+!.vscode/launch.json
+!.vscode/settings.json
+.DS_Store

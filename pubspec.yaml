@@ -1,0 +1,90 @@
+name: seatwise
+description: >-
+  SeatWise recommends whether a traveler should sit on the LEFT or RIGHT side of
+  a vehicle (buses first) based on sun/shade prediction, scenic views, nearby
+  attractions, weather along the route, crowd estimate and ETA.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management
+  flutter_riverpod: ^2.5.1
+
+  # Firebase
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  cloud_functions: ^5.1.3
+  firebase_storage: ^12.3.4
+  firebase_analytics: ^11.3.3
+  firebase_crashlytics: ^4.1.4
+
+  # Networking / config
+  http: ^1.2.2
+  flutter_dotenv: ^5.1.0
+
+  # Maps (OpenStreetMap tiles, no API key required)
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+
+  # Utilities
+  intl: ^0.19.0
+  connectivity_plus: ^6.0.5
+  shared_preferences: ^2.3.2
+  equatable: ^2.0.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  mocktail: ^1.0.4
+
+  # App icon + native splash generation (dev-time only, see README).
+  flutter_launcher_icons: ^0.14.1
+  flutter_native_splash: ^2.4.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
+    - assets/icon/
+    - assets/splash/
+
+# --- App icon config ---------------------------------------------------------
+# Run after `flutter create .` has generated android/ios folders:
+#   dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#00695C"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+
+# --- Native splash screen config ---------------------------------------------
+# Run after `flutter create .`:
+#   dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#00695C"
+  image: "assets/splash/logo.png"
+  color_dark: "#00332C"
+  image_dark: "assets/splash/logo.png"
+  android_12:
+    color: "#00695C"
+    image: "assets/splash/logo.png"
+    icon_background_color: "#00695C"
+    color_dark: "#00332C"
+    image_dark: "assets/splash/logo.png"
+    icon_background_color_dark: "#00332C"
+  android: true
+  ios: true
