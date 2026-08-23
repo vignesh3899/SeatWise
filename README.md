@@ -1,67 +1,92 @@
-# SeatWise 🚌🌤️
+<p align="center">
+  <img src="./docs/images/banner.png" alt="SeatWise banner" width="100%" />
+</p>
 
-**SeatWise recommends whether you should sit on the LEFT or RIGHT side of a
-vehicle (buses first)** — based on sun/shade prediction, scenic views, nearby
-highly‑rated attractions, weather along the journey, an estimated crowd level,
-ETA, and a clear explanation of *why*.
+<h1 align="center">SeatWise 🚌☀️</h1>
 
-It is a production‑oriented **Flutter + Firebase** application built with clean
-architecture, Riverpod, and a deterministic recommendation engine that runs both
-**on‑device** (offline‑aware) and **in the cloud** (Firebase Cloud Functions).
+<p align="center">
+  <b>Which side should you sit on? SeatWise tells you — and why.</b><br/>
+  Sun & shade prediction, scenic views, weather, and crowd level, blended into one confident LEFT / RIGHT pick. 🪑✨
+</p>
 
-Everything uses **free APIs only**: OpenRouteService, OpenWeather, OpenStreetMap
-(Nominatim + Overpass), and a local SunCalc port.
+<p align="center">
+  <img src="https://img.shields.io/badge/Flutter-3.27%2B-02569B?logo=flutter&logoColor=white" alt="Flutter" />
+  <img src="https://img.shields.io/badge/Firebase-Auth%20%7C%20Firestore%20%7C%20Functions-FFCA28?logo=firebase&logoColor=black" alt="Firebase" />
+  <img src="https://img.shields.io/badge/Dart-3.6%2B-0175C2?logo=dart&logoColor=white" alt="Dart" />
+  <img src="https://img.shields.io/badge/State%20management-Riverpod-40C4FF" alt="Riverpod" />
+  <img src="https://img.shields.io/badge/license-MIT-lightgrey" alt="License" />
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs welcome" />
+</p>
 
----
-
-## Table of contents
-
-1. [How it works](#how-it-works)
-2. [Architecture](#architecture)
-3. [Project structure](#project-structure)
-4. [Prerequisites & tooling](#prerequisites--tooling)
-   - [1. Install Flutter](#1-install-flutter)
-   - [2. Install Android Studio](#2-install-android-studio)
-   - [3. Install VS Code](#3-install-vs-code)
-   - [4. Install the Flutter extension](#4-install-the-flutter-extension)
-   - [5. Install the Firebase CLI](#5-install-the-firebase-cli)
-5. [Firebase setup](#firebase-setup)
-   - [6. Create a Firebase project](#6-create-a-firebase-project)
-   - [7. Firestore setup](#7-firestore-setup)
-   - [8. Authentication setup](#8-authentication-setup)
-   - [9. Cloud Functions deployment](#9-cloud-functions-deployment)
-6. [10. Configure environment variables (.env)](#10-configure-environment-variables-env)
-7. [11. `flutter pub get`](#11-flutter-pub-get)
-8. [12. `flutter run`](#12-flutter-run)
-9. [13. App workflow](#13-app-workflow)
-10. [Testing](#testing)
-11. [Free API notes & limits](#free-api-notes--limits)
-12. [About the Ponytail reference](#about-the-ponytail-reference)
+<p align="center">
+  <a href="#-features">Features</a> •
+  <a href="#-screenshots">Screenshots</a> •
+  <a href="#-how-it-works">How it works</a> •
+  <a href="#-getting-started">Getting started</a> •
+  <a href="#-project-structure">Project structure</a> •
+  <a href="#-testing">Testing</a> •
+  <a href="#-credits">Credits</a>
+</p>
 
 ---
 
-## How it works
+## 📖 About
 
-For a given origin, destination and departure time the engine:
+**SeatWise** recommends whether you should sit on the **LEFT** or **RIGHT** side of a vehicle (buses first) for your specific trip — based on:
+
+- ☀️ **Sun & shade prediction** along your route and departure time
+- 🏞️ **Scenic views** and nearby highly-rated attractions
+- 🌦️ **Weather** at each point along the journey
+- 👥 An estimated **crowd level** and **ETA**
+- 💬 A clear, plain-English **explanation of why**
+
+It's a production-oriented **Flutter + Firebase** app with clean architecture, Riverpod state management, and a deterministic recommendation engine that runs both **on-device** (offline-aware) and **in the cloud** (Firebase Cloud Functions). Everything runs on **free APIs only** — OpenRouteService, OpenWeather, OpenStreetMap (Nominatim + Overpass), and a local SunCalc port.
+
+---
+
+## ✨ Features
+
+| | |
+|---|---|
+| 🧭 **Smart seat recommendation** | Deterministic scoring engine blends comfort (shade), scenery, and weather into one LEFT / RIGHT / either call |
+| 🗺️ **Route-aware** | Real driving routes via OpenRouteService, sampled into segments with sun position computed for each |
+| 🌤️ **Live weather timeline** | See conditions change along your route, not just at the start |
+| 🏞️ **Scenic highlights** | Nearby attractions pulled from OpenStreetMap, grouped by side of travel |
+| 🕒 **Journey history** | Every trip is saved automatically — revisit past recommendations any time |
+| 🔐 **Firebase Auth** | Email/password sign-up, sign-in, and password reset |
+| 🌗 **Light & dark mode** | Full Material 3 theming from a single seed colour |
+| 🧊 **Liquid-glass, 3D-interactive UI** | Frosted glass cards (`GlassContainer`) and drag-to-tilt 3D cards with a moving light sheen (`TiltCard`) |
+| 🎬 **Animated splash screen** | A branded, animated launch experience, with native splash config included |
+| 🎨 **Custom app icon** | Seat + sun mark, generated for both Android (adaptive icon) and iOS |
+| 😄 **Emoji-forward UI** | Friendly, expressive copy throughout — this app doesn't take itself too seriously |
+
+---
+
+## 📱 Screenshots
+
+> These are **concept UI previews**, mocked up to match the app's actual widget tree and colour system (`lib/config/theme.dart`, `GlassContainer`, `TiltCard`) — not live device captures. Swap in real screenshots after your first `flutter run`; see [Updating the screenshots](#-updating-the-screenshots-with-real-captures) below.
+
+<p align="center">
+  <img src="./docs/images/mockup_home.png" alt="Home screen preview" width="45%" />
+  <img src="./docs/images/planner.png" alt="Home screen preview" width="45%" />
+  &nbsp;&nbsp;
+  <img src="./docs/images/mockup_recommendation.png" alt="Recommendation screen preview" width="45%" />
+  <img src="./docs/images/mockup_recommendation2.png" alt="Recommendation screen preview" width="45%" />
+</p>
+
+---
+
+## 🧠 How it works
+
+For a given origin, destination and departure time, the engine:
 
 1. Fetches a driving route from **OpenRouteService** (full polyline + ETA).
-2. Samples the polyline into ~2 km **segments**, each with a travel heading and
-   an estimated clock time (derived from the route's average speed).
-3. For each segment it computes the **sun position** (a dependency‑free SunCalc
-   port) and decides which side of the vehicle the sun falls on, weighted by how
-   perpendicular and how strong the sun is, and by sky **clearness** from
-   **OpenWeather**.
-4. It finds scenic **attractions** near the route with **OpenStreetMap Overpass**
-   and assigns each to the left or right of travel.
-5. It blends three 0–100 sub‑scores per side — **comfort** (shade), **scenery**,
-   and **weather** — into a final score, picks the better side (or "either" when
-   close), and writes a plain‑English explanation.
+2. Samples the polyline into ~2 km **segments**, each with a travel heading and an estimated clock time.
+3. Computes the **sun position** for each segment (a dependency-free SunCalc port) and decides which side of the vehicle the sun falls on — weighted by angle, intensity, and sky **clearness** from **OpenWeather**.
+4. Finds scenic **attractions** near the route with **OpenStreetMap Overpass** and assigns each to the left or right of travel.
+5. Blends three 0–100 sub-scores per side — **comfort** (shade), **scenery**, and **weather** — into a final score, picks the better side (or "either" when close), and writes a plain-English explanation.
 
-The exact same algorithm is implemented twice — in Dart (`lib/engine/`) and in
-TypeScript (`functions/src/engines/`) — so the app can call the Cloud Function or
-fall back to the on‑device engine transparently.
-
-## Architecture
+The exact same algorithm is implemented twice — in Dart (`lib/engine/`) and TypeScript (`functions/src/engines/`) — so the app can call the Cloud Function or fall back to the on-device engine transparently.
 
 ```
 UI (screens/widgets)
@@ -75,235 +100,86 @@ Services (HTTP clients)      Engine (pure, deterministic)
 Free APIs (ORS/OpenWeather/OSM)  SunCalc + scoring
 ```
 
-- **Clean architecture + repository pattern**: the UI never touches Firebase or
-  `http` directly.
-- **`Result<T>` / `Failure`**: explicit, exhaustively‑switched error handling.
-- **Riverpod**: dependency injection and state, no service locators or globals.
-- **Material 3** with light/dark theming from a single seed colour.
+---
 
-## Project structure
+## 🚀 Getting started
+
+### Prerequisites
+
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) 3.27+ (`flutter doctor` should be green)
+- Android Studio (SDK + an emulator, or a physical device) / Xcode for iOS
+- [Firebase CLI](https://firebase.google.com/docs/cli): `npm install -g firebase-tools`
+- [FlutterFire CLI](https://firebase.google.com/docs/flutter/setup): `dart pub global activate flutterfire_cli`
+
+### 1. Clone & configure Firebase
+
+```bash
+git clone https://github.com/vignesh3899/SeatWise.git
+cd SeatWise
+flutterfire configure
+```
+
+### 2. Firestore & Auth
+
+```bash
+firebase deploy --only firestore:rules,firestore:indexes
+```
+
+Then enable **Email/Password** sign-in under **Build → Authentication** in the Firebase console.
+
+### 3. Environment variables
+
+```bash
+cp .env.example .env
+# then fill in OPEN_ROUTE_API_KEY, OPEN_WEATHER_API_KEY, etc.
+```
+
+### 4. Install & run
+
+```bash
+flutter pub get
+flutter run
+```
+
+### 5. Generate the app icon & native splash screen
+
+```bash
+dart run flutter_launcher_icons
+dart run flutter_native_splash:create
+```
+
+> Full step-by-step setup (with more detail on Cloud Functions, emulators, and troubleshooting) lives in `docs/`.
+
+---
+
+## 🗂️ Project structure
 
 ```
 seatwise/
 ├── lib/
 │   ├── config/        env, theme
 │   ├── core/          Result, Failure, exceptions, constants, geo math
-│   ├── models/        immutable domain models (+ JSON)
-│   ├── services/      OpenRouteService, OpenWeather, Nominatim, Overpass, …
-│   ├── repositories/  auth, journeys, feedback, places, recommendation
-│   ├── engine/        SunCalculator, RouteSampler, SeatEngine (scoring)
-│   ├── providers/     Riverpod providers & controllers
-│   ├── screens/       auth, home, planner, recommendation, weather, scenic,
-│   │                  map, history, feedback, profile
-│   ├── widgets/       reusable UI (seat card, score bars, tiles, …)
-│   ├── app.dart       MaterialApp + auth gate
-│   └── main.dart      bootstrap (Firebase, Crashlytics, dotenv)
-├── functions/         Cloud Functions (TypeScript) — server-side engine
-├── test/              unit + widget tests
-├── integration_test/  primary journey flow
-├── firebase.json, firestore.rules, firestore.indexes.json, storage.rules
-├── docs/              detailed setup & deployment guides
-└── .env.example
+│   ├── models/         immutable domain models (+ JSON)
+│   ├── services/       OpenRouteService, OpenWeather, Nominatim, Overpass, …
+│   ├── repositories/   auth, journeys, feedback, places, recommendation
+│   ├── engine/          SunCalculator, RouteSampler, SeatEngine (scoring)
+│   ├── providers/       Riverpod providers & controllers
+│   ├── screens/          auth, home, planner, recommendation, weather, scenic, map, history, feedback, profile, splash
+│   ├── widgets/          reusable UI — seat card, score bars, GlassContainer, TiltCard, …
+│   ├── app.dart         MaterialApp + splash + auth gate
+│   └── main.dart        bootstrap (Firebase, Crashlytics, dotenv)
+├── functions/          Cloud Functions (TypeScript) — server-side engine
+├── assets/
+│   ├── icon/            app icon source (adaptive icon + foreground)
+│   └── splash/          splash logo
+├── test/                unit + widget tests
+├── integration_test/    primary journey flow
+└── docs/                setup & deployment guides, README images
 ```
 
 ---
 
-## Prerequisites & tooling
-
-You need Flutter, an editor, and the Firebase CLI. The steps below are the quick
-version; see `docs/vscode_setup.md` for a fuller walkthrough with screenshots‑
-worthy detail.
-
-### 1. Install Flutter
-
-Install the latest stable Flutter SDK from
-<https://docs.flutter.dev/get-started/install>.
-
-```bash
-# macOS/Linux example (or use the official installer for your OS)
-git clone https://github.com/flutter/flutter.git -b stable ~/flutter
-export PATH="$PATH:$HOME/flutter/bin"   # add to your shell profile
-flutter --version
-flutter doctor                          # follow any prompts it prints
-```
-
-`flutter doctor` should eventually show all green checks for the platforms you
-intend to target (Android, and iOS/macOS if on a Mac).
-
-### 2. Install Android Studio
-
-Install Android Studio from <https://developer.android.com/studio>. On first
-launch, use the setup wizard to install:
-
-- the **Android SDK**,
-- the **Android SDK Command‑line Tools**, and
-- an **Android Virtual Device (AVD)** (an emulator) or enable USB debugging on a
-  physical device.
-
-Then accept the licences:
-
-```bash
-flutter doctor --android-licenses
-```
-
-### 3. Install VS Code
-
-Install Visual Studio Code from <https://code.visualstudio.com/>. (You can use
-Android Studio/IntelliJ instead — VS Code is used here as the primary example.)
-
-### 4. Install the Flutter extension
-
-In VS Code open **Extensions** (`Ctrl/Cmd+Shift+X`) and install the **Flutter**
-extension (it pulls in the **Dart** extension automatically). This gives you run/
-debug, hot reload, and the command palette entries used below.
-
-### 5. Install the Firebase CLI
-
-```bash
-npm install -g firebase-tools
-firebase login
-```
-
-You will also use **FlutterFire** to generate platform config:
-
-```bash
-dart pub global activate flutterfire_cli
-```
-
----
-
-## Firebase setup
-
-### 6. Create a Firebase project
-
-1. Go to the [Firebase console](https://console.firebase.google.com/) and click
-   **Add project**. Give it a name (e.g. `seatwise`) and finish the wizard.
-2. In the project, add the apps you plan to run (Android / iOS / Web) — or let
-   FlutterFire do it for you in one step:
-
-```bash
-cd seatwise
-flutterfire configure
-```
-
-`flutterfire configure` will create/overwrite **`lib/firebase_options.dart`** with
-your real (non‑secret) client configuration. The repo ships a clearly‑marked
-placeholder so it compiles before you run this.
-
-### 7. Firestore setup
-
-1. In the console, open **Build → Firestore Database → Create database** and start
-   in **production mode**.
-2. Deploy the security rules and indexes included in this repo:
-
-```bash
-firebase deploy --only firestore:rules,firestore:indexes
-```
-
-The app uses three collections: `users`, `journeys`, and `feedback`. Rules
-restrict every document to its owner (see `firestore.rules`).
-
-### 8. Authentication setup
-
-1. Open **Build → Authentication → Get started**.
-2. Enable the **Email/Password** sign‑in provider.
-
-That's all the app needs — registration, login and password‑reset all work
-against Email/Password.
-
-### 9. Cloud Functions deployment
-
-The server‑side engine lives in `functions/`. It exposes one callable,
-`recommendSeat`, that mirrors the on‑device engine.
-
-```bash
-cd functions
-npm install
-npm run build          # compiles TypeScript -> lib/
-
-# Store the API keys as Firebase secrets (never in source):
-firebase functions:secrets:set OPEN_ROUTE_API_KEY
-firebase functions:secrets:set OPEN_WEATHER_API_KEY
-
-# Deploy:
-firebase deploy --only functions
-```
-
-> Deploying Cloud Functions requires the Firebase **Blaze (pay‑as‑you‑go)** plan.
-> The app works fully **without** deploying functions — it simply uses the
-> on‑device engine. Set `USE_CLOUD_ENGINE=true` in `.env` to prefer the cloud.
-
-See `docs/deployment_guide.md` for local emulation and troubleshooting.
-
----
-
-## 10. Configure environment variables (.env)
-
-**Never hardcode API keys.** Copy the example and fill in your keys:
-
-```bash
-cp .env.example .env
-```
-
-```dotenv
-OPEN_ROUTE_API_KEY=your_openrouteservice_key
-OPEN_WEATHER_API_KEY=your_openweather_key
-FIREBASE_PROJECT_ID=your_project_id
-FIREBASE_API_KEY=your_web_api_key
-USE_CLOUD_ENGINE=false
-```
-
-For the Cloud Functions, also:
-
-```bash
-cp functions/.env.example functions/.env   # for local emulation only
-```
-
-How to obtain each free key is documented in `docs/api_setup.md`.
-
-## 11. `flutter pub get`
-
-```bash
-flutter pub get
-```
-
-## 12. `flutter run`
-
-Start an emulator (or plug in a device) and run:
-
-```bash
-flutter run
-```
-
-Hot‑reload with `r`, hot‑restart with `R`. To build a release APK:
-
-```bash
-flutter build apk --release
-```
-
-## 13. App workflow
-
-1. **Sign up / sign in** with email and password.
-2. On **Home**, tap **Plan a journey**.
-3. In the **planner**, search and pick a **From** and **To** (OpenStreetMap
-   geocoding), choose a **departure time**, and set your **shade preference**.
-4. Tap **Get seat recommendation**. SeatWise fetches the route, sun, weather and
-   attractions and shows:
-   - the recommended **LEFT / RIGHT** side with a confidence chip and a bus
-     diagram,
-   - a **"Why this side"** explanation,
-   - a **score breakdown** (comfort / scenery / weather, left vs right),
-   - a **weather timeline** along the route,
-   - **scenic highlights** grouped by side, and
-   - the **route on a map** (OpenStreetMap tiles).
-5. The journey is saved to **History** automatically; open any past journey to
-   review it again.
-6. Leave **feedback** ("was this helpful?") to help improve future tuning.
-7. Manage your **profile**: shade preference, **dark mode**, and sign‑out.
-
----
-
-## Testing
+## 🧪 Testing
 
 ```bash
 flutter test                                   # unit + widget tests
@@ -311,53 +187,52 @@ flutter test integration_test/app_test.dart    # primary journey flow
 cd functions && npm run build                  # type-checks the cloud engine
 ```
 
-See `docs/testing_guide.md` for details and coverage.
+---
 
-## Free API notes & limits
+## 🌐 Free API notes & limits
 
-- **OpenRouteService** – free key, generous daily quota; used for directions.
-- **OpenWeather** – free "current weather" tier; sampled at a few route points.
-- **Nominatim** (OSM) – geocoding; **max ~1 request/second**, requires a
-  descriptive User‑Agent (both handled in code).
-- **Overpass** (OSM) – POI lookup; shared public instance, be gentle.
-- **SunCalc** – implemented locally, no network, no key.
-
-All OSM usage in this app follows the OSMF usage policies (identifying
-User‑Agent, debounced search, bounded queries).
-
-## About the Ponytail reference
-
-The original brief asked to use *"Ponytail"* as a planning/milestone framework.
-The repository at `github.com/DietrichGebert/ponytail` is real, but it is **not**
-a milestone/task tracker — it is an AI‑agent ruleset that pushes for *minimal
-code* ("the best code is the code you never wrote"). It therefore can't "track
-milestones." This project was instead built with an explicit, structured task
-plan (see the commit/section breakdown), while honoring Ponytail's actual spirit:
-pragmatic clean architecture with no dead scaffolding or over‑engineering.
+| API | Used for | Notes |
+|---|---|---|
+| [OpenRouteService](https://openrouteservice.org/) | Directions | Free key, generous daily quota |
+| [OpenWeather](https://openweathermap.org/) | Weather along route | Free "current weather" tier |
+| [Nominatim](https://nominatim.org/) (OSM) | Geocoding | Max ~1 req/sec, descriptive User-Agent required |
+| [Overpass](https://overpass-api.de/) (OSM) | Points of interest | Shared public instance — be gentle |
+| SunCalc | Sun position | Local, dependency-free, no key needed |
 
 ---
 
-Made with Flutter + Firebase. Contributions and feedback welcome.
+## 🖼️ Updating the screenshots with real captures
 
-## New: icon, splash screen, and liquid-glass 3D UI
+Once you have the app running on a device/emulator:
 
-This build adds:
-- **App icon** — `assets/icon/icon.png` (+ `icon_foreground.png` for Android adaptive icons), a seat + sun mark on the brand teal/amber gradient. Config for `flutter_launcher_icons` is in `pubspec.yaml`.
-- **Splash screen** — an in-app animated splash (`lib/screens/splash/splash_screen.dart`) shown on launch, plus `flutter_native_splash` config for a matching native cold-start splash.
-- **Liquid-glass, 3D-interactive UI** — two new reusable widgets:
-  - `lib/widgets/glass_container.dart` — frosted, blurred "glass" panel.
-  - `lib/widgets/tilt_card.dart` — drag-to-tilt 3D card with a moving light sheen (`TiltCard`), plus a gentle bob animation (`FloatingWidget`).
-  These are wired into the home screen's plan card and recent-journey cards, with emoji accents throughout.
+1. Take screenshots of the Home and Recommendation screens (⌘+S / device screenshot shortcut).
+2. Drop them into `docs/images/`, e.g. `docs/images/screenshot_home.png`.
+3. Swap the `<img>` `src` paths in the **Screenshots** section of this README to point at your new files.
+4. Commit and push — GitHub renders README images straight from the repo, no external hosting needed.
 
-### One-time setup to generate the native icon/splash files
+---
 
-This project currently ships **without** `android/` and `ios/` platform folders. Before the icon and native splash can be generated, run:
+## 🤝 Contributing
 
-```bash
-flutter create .          # adds android/ and ios/ folders for this project
-flutter pub get
-dart run flutter_launcher_icons
-dart run flutter_native_splash:create
-```
+Issues and pull requests are welcome! If you're adding a feature, please:
 
-`flutter create .` is safe to run on an existing project — it only fills in the missing platform folders, it won't touch your `lib/` code. After that, the icon and native splash screen will be wired into the Android/iOS projects automatically. The in-app Dart splash screen already works with no extra steps.
+1. Fork the repo and create a branch: `git checkout -b feature/my-feature`
+2. Keep the architecture boundaries intact (UI → providers → repositories → services/engine)
+3. Add/update tests where it makes sense
+4. Open a PR with a clear description of the change
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for details.
+
+---
+
+## 🙌 Credits
+
+- Built by [**vignesh3899**](https://github.com/vignesh3899)
+- App icon, splash screen, liquid-glass/3D UI components, banner, and this README were designed and implemented with **[Claude](https://claude.com)** (Anthropic) 🤖
+- Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors • Routing by [OpenRouteService](https://openrouteservice.org/) • Weather by [OpenWeather](https://openweathermap.org/)
+
+<p align="center">Made with 💚 in Flutter + Firebase</p>
