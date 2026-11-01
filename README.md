@@ -43,6 +43,17 @@
 It's a production-oriented **Flutter + Firebase** app with clean architecture, Riverpod state management, and a deterministic recommendation engine that runs both **on-device** (offline-aware) and **in the cloud** (Firebase Cloud Functions). Everything runs on **free APIs only** — OpenRouteService, OpenWeather, OpenStreetMap (Nominatim + Overpass), and a local SunCalc port.
 
 ---
+## 🎬 SeatWise — Project Showcase
+
+<p align="center">
+  <a href="https://github.com/user-attachments/assets/790b9370-3923-44f1-a2dc-4d8833a7eb3d">
+    <img src="./assets/seatwise-preview.png" width="850" alt="SeatWise Demo">
+  </a>
+</p>
+
+<p align="center">
+  **▶ Click the preview to watch SeatWise in action**
+</p>
 
 ## ✨ Features
 
